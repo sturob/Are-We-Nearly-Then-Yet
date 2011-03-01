@@ -22,12 +22,21 @@
 	
   <!-- <link rel="stylesheet/less" href="css/custom.less"> -->
 
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" id="main_styles" href="css/custom.css">
+
+  <script>
+  if (window.location.hostname == 'localhost') {
+    var l = document.getElementById('main_styles');
+    console.log(l)
+    l.rel = 'stylesheet/less';
+    l.href = 'css/custom.less';
+  }
+  </script>
 
 	<script src="js/libs/jquery-1.5.min.js"></script>
 	<script src="js/libs/modernizr-1.6.min.js"></script>
 	<script src="js/libs/date.js"></script>
-  <!-- // <script src="js/libs/less.min.js"></script> -->
+  <script src="js/libs/less.min.js"></script>
 	<script src="js/libs/sammy.min.js"></script>
 </head>
 

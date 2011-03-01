@@ -59,6 +59,8 @@ var app = $.sammy(function() {
 
 
 $(function(){
+
+  
   app.run();
 });
 
