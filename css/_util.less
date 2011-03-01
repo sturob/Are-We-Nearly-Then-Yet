@@ -1,0 +1,34 @@
+
+
+.grad_linear (@start:"", @end:"") {
+    background: -webkit-gradient(linear, left top, left bottom, from(@start), to(@end));
+    background: -moz-linear-gradient(-90deg,@start,@end);
+}
+
+.grad_radial(@start:"", @end: "", @spread: 6, @center: 50%) {
+  background: -webkit-gradient(radial, @center @center, 0, @center @center, @spread, from(@start), to(@end));
+  background: -moz-radial-gradient(@center @center, farthest-side, @start, @end); /* For Mozilla/Gecko (Firefox etc) */
+}
+
+.box_shadow (@x: 0, @y: 0, @blur: 0, @color: #000) {
+  -webkit-box-shadow: @x @y @blur @color;
+  -moz-box-shadow: @x @y @blur @color;
+}
+
+
+.rounded (@radius: 5px) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.rounded_corners(@tl: 5px, @tr: 5px, @br: 5px, @bl: 5px) {
+  -moz-border-radius: @tl @tr @br @bl;
+  -webkit-border-radius: @tl @tr @br @bl;
+  border-radius: @tl @tr @br @bl;
+}
+
+
+.wtf {
+  outline: 2px solid red;
+}
