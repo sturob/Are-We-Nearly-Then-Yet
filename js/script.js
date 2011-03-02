@@ -1,3 +1,11 @@
+/* YODO
+  - cache manifest
+  - interface for adding new ones
+  - explaination text + examples (olympics, obama, ???)
+  - incrementing numbers while progress bar moves
+*/
+
+
 
 var dates = {
   today: Date.parse('today')
@@ -17,7 +25,13 @@ var app = $.sammy(function() {
     // display date entry
   });
 
-  this.get('#/:date/:days', function() {
+  this.get('#/:date/:days(.*)', function() {
+
+    var text = this.params['splat'] + "";
+
+    text = text.replace(/^\//g, ''); // kill the slash
+
+    $('h1').text(text);
 
     dates.start = Date.parse( this.params['date'] );
     dates.end = Date.parse( this.params['date'] );
@@ -32,16 +46,13 @@ var app = $.sammy(function() {
     
     var days_left = Math.floor( (dates.end - dates.today) / DAY );
     var days_to_start = Math.ceil( (dates.start - dates.today) / DAY );
-    
-    
+        
+    $('link[rel*=shortcut]').remove();
     
     var hex_section = Math.hem( Math.ceil( (percent / 100) * 16 ), 0, 16 );
-    
-    // $('link[rel*=shortcut]').attr( 'href', 'images/fav/fav' + hex_section + '.png' )
-                            // .remove().clone().appendTo('head');
-    
-    $('link[rel*=shortcut]').remove();
-    $('<link id="favicon" rel="shortcut icon" href="images/fav/fav' + hex_section + '.png">').appendTo('head');
+    $('head').append( 
+      $( '<link id="favicon" rel="shortcut icon" href="images/fav/fav' + hex_section + '.png">' )
+    );
     
     setTimeout(function() {
       if (dates.today > dates.end) {
@@ -66,6 +77,7 @@ var app = $.sammy(function() {
   });
 
 });
+
 
 
 $(function(){
