@@ -8,7 +8,7 @@
 
 
 var dates = {
-  today: Date.parse('today')
+  today: Date.parse( 'today' )
 };
 
 var DAY = 1000 * 60 * 60 * 24;
@@ -34,11 +34,15 @@ var app = $.sammy(function() {
     $('h1').text(text);
 
     dates.start = Date.parse( this.params['date'] );
-    dates.end = Date.parse( this.params['date'] );
 
-    var days = parseInt( this.params['days'], 10 );
-    
-    dates.end.add( days ).days();
+    if (this.params['days'].match(/\-/)) {
+      dates.end = Date.parse( this.params['days'] );
+    } else {
+      dates.end = Date.parse( this.params['date'] );
+      var days = parseInt( this.params['days'], 10 );
+      dates.end.add( days ).days();
+    }
+
     
     var length = dates.end - dates.start;
     var done = dates.today - dates.start;
