@@ -27,11 +27,15 @@ var app = $.sammy(function() {
   this.get('#/:date/:days(.*)', function() {
 
     var text = this.params['splat'] + "";
-
     text = text.replace(/^\//g, ''); // kill the slash
 
+
+    $( '#bar' ).css({ width: 0 });
+
+    // reset
     $( 'h1' ).text( text );
-    $('#main').removeClass('complete');
+    $('body').removeClass('complete');
+    
     // $('#status').hide();
 
     dates.start = Date.parse( this.params['date'] );
@@ -53,12 +57,16 @@ var app = $.sammy(function() {
     var days_left = Math.floor( (dates.end - dates.today) / DAY );
     var days_to_start = Math.ceil( (dates.start - dates.today) / DAY );
 
+    $( 'h3' ).text( days_during + ' day' + s(days_during) );
+
     $('link[rel*=shortcut]').remove();
     
     var hex_section = Math.hem( Math.ceil( (percent / 100) * 16 ), 0, 16 );
     $('head').append( 
       $( '<link id="favicon" rel="shortcut icon" href="images/fav/fav' + hex_section + '.png">' )
     );
+    
+    if (percent < 0) $('#status').hide();
     
     setTimeout(function() {
       if (dates.today > dates.end) {
@@ -72,7 +80,7 @@ var app = $.sammy(function() {
         complete: function() {
           if (percent == 100) {
             setTimeout(function() {
-              $('#main').addClass('complete');
+              $('body').addClass('complete');
             }, 500);
 
             $( '#status' ).html( 'You made it!' ).delay(400).fadeIn( 500 );
