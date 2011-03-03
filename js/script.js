@@ -2,7 +2,6 @@
   - cache manifest
   - interface for adding new ones
   - explaination text
-  - incrementing numbers while progress bar moves
 */
 
 
@@ -33,7 +32,7 @@ var app = $.sammy(function() {
 
     $( 'h1' ).text( text );
     $('#main').removeClass('complete');
-    $('#status').hide();
+    // $('#status').hide();
 
     dates.start = Date.parse( this.params['date'] );
 
@@ -50,9 +49,10 @@ var app = $.sammy(function() {
     var done = dates.today - dates.start;
     var percent = (done / length) * 100;
     
+    var days_during = Math.floor( (dates.end - dates.start) / DAY );
     var days_left = Math.floor( (dates.end - dates.today) / DAY );
     var days_to_start = Math.ceil( (dates.start - dates.today) / DAY );
-        
+
     $('link[rel*=shortcut]').remove();
     
     var hex_section = Math.hem( Math.ceil( (percent / 100) * 16 ), 0, 16 );
@@ -64,21 +64,33 @@ var app = $.sammy(function() {
       if (dates.today > dates.end) {
         percent = 100;
       }
-      
-      $( '#bar' ).animate({ width: percent + "%" }, Math.max(percent * 10, 1000), function() {
-        if (percent == 100) {
-          setTimeout(function() {
-            $('#main').addClass('complete');
-          }, 500);
 
-          $( '#status' ).html( 'You made it!' ).delay(400).fadeIn( 500 );
-        } else if (percent < 0) {
-          $( '#status' ).html( 'Starts in <span>' + days_to_start + '</span> day' + s(days_to_start) ).delay(400).fadeIn( 500 );
-        } else {
-          $( '#status' ).html('<span>' + days_left + '</span> day' + s(days_left) + ' to go' ).delay(400).fadeIn( 500 );
+      
+      $( '#bar' ).animate({ width: percent + "%" }, {
+        duration: Math.max(percent * 30, 1000), 
+        easing: 'easeInOutQuad',
+        complete: function() {
+          if (percent == 100) {
+            setTimeout(function() {
+              $('#main').addClass('complete');
+            }, 500);
+
+            $( '#status' ).html( 'You made it!' ).delay(400).fadeIn( 500 );
+          } else if (percent < 0) {
+            $( '#status' ).html( 'Starts in <span>' + days_to_start + '</span> day' + s(days_to_start) ).delay(400).fadeIn( 500 );
+          } else {
+            // $( '#status' ).html().delay(400).fadeIn( 500 );
+          }
+        },
+        step: function(now, fx) {
+          // var data = fx.elem.id + ' ' + fx.prop + ': ' + now;
+          // $('body').append('<div>' + data + '</div>');
+          var d = Math.floor( 
+            days_during - (days_during * (now / 100))
+          );
+          $('#status').html( '<span>' + d + '</span> day' + s(d) + ' to go' )  
         }
       });
-      
     }, 300);
   });
 
