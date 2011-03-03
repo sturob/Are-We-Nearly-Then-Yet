@@ -1,7 +1,7 @@
 /* YODO
   - cache manifest
   - interface for adding new ones
-  - explaination text + examples (olympics, obama, ???)
+  - explaination text
   - incrementing numbers while progress bar moves
 */
 
@@ -31,7 +31,9 @@ var app = $.sammy(function() {
 
     text = text.replace(/^\//g, ''); // kill the slash
 
-    $('h1').text(text);
+    $( 'h1' ).text( text );
+    $('#main').removeClass('complete');
+    $('#status').hide();
 
     dates.start = Date.parse( this.params['date'] );
 
