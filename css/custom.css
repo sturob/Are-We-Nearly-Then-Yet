@@ -150,6 +150,8 @@ nav a {
   text-transform: uppercase;
   position: absolute;
   top: 64px;
+  /*    opacity: 0.5;*/
+
   color: #111;
   font-size: 500%;
   left: 50%;

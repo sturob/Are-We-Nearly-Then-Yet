@@ -89,7 +89,8 @@ var app = $.sammy(function() {
           } else if (percent < 0) {
             $( '#status' ).html( 'Starts in <span>' + days_to_start + '</span> day' + s(days_to_start) ).delay(400).fadeIn( 500 );
           } else {
-            // $( '#status small' ).delay(400).fadeIn( 500 );
+
+            $( '#status' ).animate( { opacity: 0 }, 0).delay( 150 ).animate( { opacity: 1 }, 400);
           }
         },
         step: function(now, fx) {
