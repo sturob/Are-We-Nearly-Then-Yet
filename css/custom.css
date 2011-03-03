@@ -39,13 +39,14 @@ body {
 #examples {
   position: absolute;
   left: 32px;
+  top: 24px;
   width: 240px;
 }
 #examples a {
   text-decoration: none;
   display: block;
   color: #666;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 #examples a:hover {
   color: #888;
