@@ -146,7 +146,7 @@ nav a {
   width: 0%;
 }
 #main #status {
-  letter-spacing: -4px;
+  letter-spacing: -3px;
   text-transform: uppercase;
   position: absolute;
   top: 64px;
@@ -166,6 +166,23 @@ nav a {
   width: 80%;
   text-align: center;
   /*    display: none;*/
+
+}
+#main #status small {
+  /*      left: 50%;*/
+
+  /*      width: 300px;*/
+
+  /*      top: 80px;*/
+
+  /*      margin-left: -150px;*/
+
+  position: absolute;
+  font-size: 100%;
+  /*      font-size: 32px;*/
+
+  display: none;
+  /*      color: #888;*/
 
 }
 #main #status span {

@@ -34,7 +34,7 @@ var app = $.sammy(function() {
 
     // reset
     $( 'h1' ).text( text );
-    $('body').removeClass('complete');
+    $( 'body' ).removeClass('complete');
     
     // $('#status').hide();
 
@@ -87,7 +87,7 @@ var app = $.sammy(function() {
           } else if (percent < 0) {
             $( '#status' ).html( 'Starts in <span>' + days_to_start + '</span> day' + s(days_to_start) ).delay(400).fadeIn( 500 );
           } else {
-            // $( '#status' ).html().delay(400).fadeIn( 500 );
+            // $( '#status small' ).delay(400).fadeIn( 500 );
           }
         },
         step: function(now, fx) {
@@ -96,7 +96,7 @@ var app = $.sammy(function() {
           var d = Math.floor( 
             days_during - (days_during * (now / 100))
           );
-          $('#status').html( '<span>' + d + '</span> day' + s(d) + ' to go' )  
+          $('#status').html( '<span>' + d + '</span> day' + s(d) + (percent < 100 ? ' to go' : '') )  
         }
       });
     }, 300);
