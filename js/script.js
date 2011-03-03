@@ -1,5 +1,7 @@
 /* YODO
   - cache manifest
+  - analytics
+  - better 'starts in' visualisation
   - interface for adding new ones
   - explaination text
 */
@@ -75,7 +77,7 @@ var app = $.sammy(function() {
 
       
       $( '#bar' ).animate({ width: percent + "%" }, {
-        duration: Math.max(percent * 30, 1000), 
+        duration: Math.max((percent * 10) + days_during, 1000), 
         easing: 'easeInOutQuad',
         complete: function() {
           if (percent == 100) {
