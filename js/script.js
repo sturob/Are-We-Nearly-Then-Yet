@@ -68,15 +68,17 @@ var app = $.sammy(function() {
       $( '<link id="favicon" rel="shortcut icon" href="images/fav/fav' + hex_section + '.png">' )
     );
     
-    if (percent < 0) $('#status').hide();
+    if (percent < 0) {
+      $( '#status' ).hide().html( 'Starts in <span>' + days_to_start + '</span> day' + s(days_to_start) ).delay(400).fadeIn( 500 );
+      return;
+    }
     
     setTimeout(function() {
       if (dates.today > dates.end) {
         percent = 100;
       }
-
       
-      $( '#bar' ).animate({ width: percent + "%" }, {
+      $( '#bar' ).stop().animate({ width: percent + "%" }, {
         duration: Math.max((percent * 10) + days_during, 1000), 
         easing: 'easeInOutQuad',
         complete: function() {
@@ -87,19 +89,16 @@ var app = $.sammy(function() {
 
             $( '#status' ).html( 'You made it!' ).delay(400).fadeIn( 500 );
           } else if (percent < 0) {
-            $( '#status' ).html( 'Starts in <span>' + days_to_start + '</span> day' + s(days_to_start) ).delay(400).fadeIn( 500 );
+    
           } else {
-
-            $( '#status' ).animate( { opacity: 0 }, 0).delay( 150 ).animate( { opacity: 1 }, 400);
+            $( '#status span' ).delay( 50 ).animate( { opacity: 0 }, 0).delay( 150 ).animate( { opacity: 1 }, 1200);
           }
         },
         step: function(now, fx) {
-          // var data = fx.elem.id + ' ' + fx.prop + ': ' + now;
-          // $('body').append('<div>' + data + '</div>');
           var d = Math.floor( 
             days_during - (days_during * (now / 100))
-          );
-          $('#status').html( '<span>' + d + '</span> day' + s(d) + (percent < 100 ? ' to go' : '') )  
+          );        
+          $('#status').html( '<span>' + d + '</span> day' + s(d) + (percent < 100 ? ' to go' : '') );
         }
       });
     }, 300);
