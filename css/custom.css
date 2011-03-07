@@ -163,7 +163,7 @@ nav a {
   width: 620px;
   text-shadow: none;
 }
-form:focus input {
+form.focus input {
   background-color: #333 !important;
 }
 form {

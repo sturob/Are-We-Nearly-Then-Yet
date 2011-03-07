@@ -141,6 +141,16 @@ $(function(){
     return false;
   });
   
+  $('form input').focus(function() {
+    $(this).parents('form').addClass('focus');
+    return false;
+  });
+  
+  $('form input').blur(function() {
+    $(this).parents('form').removeClass('focus');
+    return false;
+  });
+  
   $('form').submit( function(foo) {
     var new_url = '/' + $('#from', this).val() +
                   '/'  + $('#to', this).val() + 
