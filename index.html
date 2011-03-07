@@ -44,7 +44,12 @@
 
 <body>
   <h1></h1>
-  <h3></h3>
+
+
+  <div id="today">
+    <!-- today -->
+    <span></span>
+  </div>
 
   <div id="examples">
     <h2>Examples</h2>
@@ -53,7 +58,33 @@
     <a href="#/2012-07-27/2012-08-12/London+2012">2012 Olympics</a>
     <a href="#/2010-10-26/2011-04-13/NBA+Season">NBA Season</a>
     <a href="#/2010-11-17/2011-04-27/South+Park+Off-air">South Park Off-air</a>
+
+    <!-- <p><a class="button" href="#/add">Make your own</a></p> -->
   </div>
+  
+  <form method="#/add" method="post">
+    <input id="title" type="text" placeholder="Title">
+    <div id="from_div">
+      <input id="from" type="date" placeholder="Waiting from...">
+    </div>
+    <div id="to_div">
+      <input id="to" type="date" placeholder="... until">
+    </div>
+    <div id="duration_div"><span></span></div>
+    <input type="submit" value="Show me!" id="show">
+    <!-- <a href="#" class="cancel">Cancel</a> -->
+  </form>
+  
+  <div id="about">
+    <h2>What is this?</h2>
+    <p>A silly little HTML5 app to visualise how long you have to wait for things.</p>
+  </div>
+  
+  <!-- <div id="yours">
+    <h2>Recently</h2>
+    <a href="#/2011-03-01/2011-04-01/Flat+Hole">Flat Hole</a>
+    <a href="#/1981-04-10/2011-01-1/Stu+is+30">Stu is 30</a>
+  </div> -->
   
 	<div id="header-container">
 		<!-- header class="wrapper">
@@ -81,6 +112,7 @@
 
 	<div id="footer-container">
 		<footer class="wrapper">
+		  &copy; <a href="http://sturob.com">Stuart Robinson</a>
       <!-- <h3>A nice footer</h3> -->
 		</footer>
 	</div>

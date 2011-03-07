@@ -1,9 +1,7 @@
 /* YODO
   - cache manifest
-  - analytics
   - better 'starts in' visualisation
   - interface for adding new ones
-  - explaination text
 */
 
 
@@ -13,6 +11,7 @@ var dates = {
 };
 
 var DAY = 1000 * 60 * 60 * 24;
+
 
 var app = $.sammy(function() {
   
@@ -24,9 +23,18 @@ var app = $.sammy(function() {
   
   this.get('#/', function() {
     // display date entry
+    $('form').hide();
+    
+  });
+
+  this.get('#/add', function() {
+    $('form').show();
   });
 
   this.get('#/:date/:days(.*)', function() {
+    
+    $('form').fadeIn();
+    var $today = $('#today');
 
     var text = this.params['splat'] + "";
     text = text.replace(/^\//g, ''); // kill the slash
@@ -59,7 +67,12 @@ var app = $.sammy(function() {
     var days_left = Math.floor( (dates.end - dates.today) / DAY );
     var days_to_start = Math.ceil( (dates.start - dates.today) / DAY );
 
-    $( 'h3' ).text( days_during + ' day' + s(days_during) );
+    $( 'form #duration_div span' ).html( '<b>' + days_during + '</b><br> day' + s(days_during) );
+    
+    var format = "yyyy-MM-dd";
+    $( 'input#from ').val( dates.start.toString( format ) );
+    $( 'input#to ').val( dates.end.toString( format ) );
+    $( 'input#title ').val( text );
 
     $('link[rel*=shortcut]').remove();
     
@@ -95,8 +108,17 @@ var app = $.sammy(function() {
           }
         },
         step: function(now, fx) {
+          var days_passed = Math.ceil(days_during * (now / 100));
+          
+          var date_today = dates.start.clone();
+          date_today.addDays(days_passed);
+          
+          var format = 'ddd, d MMMM yyyy';
+          
+          $today.css({ left: now + "%"}).find('span').text( date_today.toString( format ) );
+          
           var d = Math.floor( 
-            days_during - (days_during * (now / 100))
+            days_during - days_passed
           );        
           $('#status').html( '<span>' + d + '</span> day' + s(d) + (percent < 100 ? ' to go' : '') );
         }
@@ -110,6 +132,20 @@ var app = $.sammy(function() {
 
 $(function(){
   app.run();
+  
+  $('.cancel').click(function() {
+    window.history.back();
+    return false;
+  });
+  
+  $('form').submit( function(foo) {
+    var new_url = '#/' + $('#from', this).val() +
+                  '/'  + $('#to', this).val() + 
+                  '/'  + $('#title', this).val();
+    
+    window.location = new_url;
+    return false;
+  })
 });
 
 Math.hem = function (n, low, high) {

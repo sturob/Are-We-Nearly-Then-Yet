@@ -13,10 +13,12 @@
 */
 html {
   background-color: #111;
+  overflow: hidden;
 }
 body {
   font-family: Helvetica, Helvetica Neue, Arial, sans-serif;
   background-color: #111;
+  overflow: hidden;
 }
 .wrapper {
   /*  margin: auto;*/
@@ -36,11 +38,44 @@ body {
   -moz-box-shadow: 0 40px 40px -40px #aaaaaa;
   box-shadow: 0 0 40px #AAA;
 }
+#yours {
+  position: absolute;
+  right: 32px;
+  top: 24px;
+  width: 140px;
+}
+#yours a {
+  text-decoration: none;
+  display: block;
+  color: #666;
+  margin-bottom: 6px;
+}
+#about {
+  /*  position: absolute;*/
+
+  /*  top: 24px;*/
+
+  /*  left: 240px;*/
+
+  /*  right: 240px;*/
+
+  width: 235px;
+  margin: 24px auto;
+  /*  font-size: 15px;*/
+
+  line-height: 1.6em;
+  color: #bbb;
+  /*  text-align: center;*/
+
+}
+#about p {
+  margin-bottom: 12px;
+}
 #examples {
   position: absolute;
   left: 32px;
   top: 24px;
-  width: 240px;
+  width: 140px;
 }
 #examples a {
   text-decoration: none;
@@ -51,44 +86,64 @@ body {
 #examples a:hover {
   color: #888;
 }
-#examples h2 {
-  color: #444;
-  font-size: 16px;
-  margin-bottom: 8px;
+#examples p {
+  margin-top: 24px;
 }
-h1, h3 {
+#examples .button {
+  display: inline;
+  background-color: #999;
+  color: #111;
+  padding: 4px 6px;
+  text-decoration: none;
+  position: relative;
+}
+#examples .cancel {
+  color: #999;
+  font-size: 11px;
+  text-decoration: none;
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+h1 {
   color: white;
   /*  background-color: red;*/
 
   text-align: center;
-  font-size: 24px;
+  font-size: 36px;
   font-weight: normal;
   position: absolute;
   width: 100%;
-  top: 80%;
-}
-h3 {
-  color: #888;
-  font-size: 12px;
-  top: 88%;
-  /*  font-size: 40px;*/
-
-}
-h2, h3 {
-  /*  margin:30px 0;*/
-
-}
-#title, h2, h3 {
-  font-weight: normal;
-}
-#title {
-  font-size: 80px;
-  color: white;
-  padding-top: 35px;
-  float: left;
+  top: 75%;
+  display: none;
 }
 h2 {
-  font-size: 55px;
+  color: #444;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+#today {
+  position: absolute;
+  top: 50%;
+  margin-top: -110px;
+  margin-left: -1px;
+  width: 200px;
+  left: 0%;
+  color: #444;
+  height: 20px;
+  /*  background-color: red;*/
+
+  font-size: 18px;
+  text-align: center;
+  border-left: 1px solid #444;
+}
+#today span {
+  position: relative;
+  display: block;
+  top: -24px;
+  left: -100px;
+  /*  background-color: red;*/
+
 }
 nav {
   float: right;
@@ -107,6 +162,128 @@ nav a {
   font: 16px/26px Helvetica, Helvetica Neue, Arial;
   width: 620px;
   text-shadow: none;
+}
+form:focus input {
+  background-color: #333 !important;
+}
+form {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  margin-top: 99px;
+  height: 130px;
+}
+form #title {
+  color: #ddd;
+  font-size: 36px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  margin-top: 36px;
+  width: 400px;
+  margin-left: -200px;
+}
+form input {
+  text-align: center;
+  font-size: 24px;
+  background-color: #111;
+  z-index: 1;
+  border: 0;
+}
+form #from, form #to {
+  color: #555;
+  width: 6.5em;
+}
+form #from_div {
+  height: 130px;
+  border: 1px dotted #333333;
+  border-right: 0;
+  border-top: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+form #to_div {
+  height: 130px;
+  border: 1px dotted #333333;
+  border-left: 0;
+  border-top: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+form #from, form #to {
+  position: relative;
+  top: 114px;
+  padding: 2px 4px;
+  background-color: #111;
+}
+form #from {
+  left: 64px;
+  /*    border-left: 1px solid @line_color;*/
+
+}
+form #to {
+  right: 64px;
+  /*    border-right: 1px solid @line_color;*/
+
+}
+form #show {
+  display: none;
+}
+form #duration_div {
+  left: 200px;
+  right: 200px;
+  color: #aaa;
+  border-bottom: 1px dotted #333333;
+  /*  background-color: red;*/
+
+  bottom: 0px;
+  /*    margin-top: 154px;*/
+
+  /*    z-index: 100;*/
+
+  text-align: center;
+  position: absolute;
+  height: 24px;
+  font-weight: normal;
+}
+form #duration_div span {
+  /*    background-color: #111;*/
+
+  position: relative;
+  top: 64px;
+  /*    padding: 0 8px;*/
+
+  text-transform: uppercase;
+}
+form #duration_div span b {
+  padding: 0 8px;
+  font-size: 24px;
+}
+form #duration_div:after {
+  content: '';
+  position: absolute;
+  /*    border: 1px dotted #fff;*/
+
+  /*    -webkit-transform: rotate(45deg);*/
+
+  border-left: 0;
+  border-bottom: 0;
+  background-color: transparent;
+  top: 17px;
+  opacity: 0.15;
+  right: 25px;
+  width: 10px;
+  height: 16px;
+  display: block;
+  z-index: 100;
+  background: transparent url(../images/rarrow_head.png) 0 0 no-repeat;
+  /*    background-color: red;*/
+
+}
+.complete input#title {
+  text-decoration: line-through;
 }
 .complete h1 {
   text-decoration: line-through;
@@ -205,7 +382,9 @@ nav a {
   text-shadow: 1px 2px 0px #333333, 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 #footer-container {
-  height: 120px;
+  position: absolute;
+  bottom: 0;
+  height: 32px;
   /*  border-top:20px solid #e44d26;*/
 
   /*  margin-top:50px;*/
@@ -214,9 +393,16 @@ nav a {
      -moz-box-shadow:0 -40px 40px -40px #AAA;
           box-shadow:0 0 40px #AAA;*/
 
+  width: 100%;
 }
 #footer-container footer {
-  color: white;
+  color: #555;
+  padding-left: 24px;
+  /*  text-align: center;*/
+
+}
+#footer-container footer a {
+  text-decoration: none;
 }
 .info {
   position: absolute;
