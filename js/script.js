@@ -105,6 +105,9 @@ var app = $.sammy(function() {
     
           } else {
             $( '#status span' ).delay( 50 ).animate( { opacity: 0 }, 0).delay( 150 ).animate( { opacity: 1 }, 1200);
+            
+            $today.find( 'span' ).text( dates.today.toString( 'ddd, d MMMM yyyy' ) );
+            
           }
         },
         step: function(now, fx) {
@@ -113,9 +116,9 @@ var app = $.sammy(function() {
           var date_today = dates.start.clone();
           date_today.addDays(days_passed);
           
-          var format = 'ddd, d MMMM yyyy';
-          
-          $today.css({ left: now + "%"}).find('span').text( date_today.toString( format ) );
+          var format = days_during == days_passed ? 'ddd, d MMMM yyyy' : 'MMM yyyy';
+
+          $today.css({ left: now + "%"}).find( 'span' ).text( date_today.toString( format ) );
           
           var d = Math.floor( 
             days_during - days_passed
@@ -139,11 +142,18 @@ $(function(){
   });
   
   $('form').submit( function(foo) {
-    var new_url = '#/' + $('#from', this).val() +
+    var new_url = '/' + $('#from', this).val() +
                   '/'  + $('#to', this).val() + 
                   '/'  + $('#title', this).val();
     
-    window.location = new_url;
+    new_url = '#' + escape(new_url);
+    
+    if (window.location.hash == new_url) {
+      app.refresh();
+    } else {
+      window.location = new_url;      
+    }
+
     return false;
   })
 });
